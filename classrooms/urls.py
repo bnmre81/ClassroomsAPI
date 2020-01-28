@@ -4,6 +4,11 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from classes import views
+from classes_api import views as api_views
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -13,6 +18,14 @@ urlpatterns = [
     path('classrooms/create', views.classroom_create, name='classroom-create'),
     path('classrooms/<int:classroom_id>/update/', views.classroom_update, name='classroom-update'),
     path('classrooms/<int:classroom_id>/delete/', views.classroom_delete, name='classroom-delete'),
+
+    path('api/list/', api_views.APIListView.as_view(), name='class-list'),
+    path('api/detail/<int:class_id>/', api_views.APIDetailsView.as_view(), name='class-detail'),
+    path('api/create/', api_views.ClassroomCreate.as_view(), name='class-create'),
+    path('api/<int:class_id>/update/', api_views.ClassroomUpdate.as_view(), name='class-update'),
+    path('api/<int:class_id>/delete/', api_views.CancelClassroom.as_view(), name='class-delete'),
+    path('login/', TokenObtainPairView.as_view(), name="login"),
+
 ]
 
 if settings.DEBUG:

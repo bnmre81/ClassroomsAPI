@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'classes',
 
     'crispy_forms',
+    'classes_api',
+    'rest_framework',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -85,6 +87,15 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+REST_FRAMEWORK = {
+    
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+    
+}
+
 
 
 # Password validation
